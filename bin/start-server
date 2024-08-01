@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+# set the python path to the parent directory
+PYTHON_PATH=$(dirname $(pwd))/decor8r python3 -m decor8r.handler

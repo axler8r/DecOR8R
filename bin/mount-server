@@ -1,0 +1,3 @@
+#! /usr/bin/env zsh
+
+docker exec --interactive --tty --user vscode DecOR8R /usr/bin/zsh

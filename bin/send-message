@@ -1,0 +1,11 @@
+#! /usr/bin/env zsh
+
+synopsis() {
+    echo "Usage: echo-server <message>"
+}
+
+if [ -n $1 ]; then
+    echo "${1}" | nc -U /tmp/decor8r.sock
+else
+    synopsis
+fi

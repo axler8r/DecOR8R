@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+echo stop | nc -U /tmp/decor8r.sock
