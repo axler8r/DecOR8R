@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"**/bin/*": "shellscript",
+		},
+		"files.exclude": {
+			"**/.git": true,
+			"**/__pycache__": true,
+			"**/.DS_Store": true,
+			"**/.mypy_cache": true,
+			"**/.pytest_cache": true,
+			"**/Thumbs.db": true,
+			"poetry.lock": true,
+			"tags*": true,
+		}
+	}
+}
