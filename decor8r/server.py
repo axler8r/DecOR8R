@@ -26,26 +26,26 @@ class Decor8rServer:
         cleanup(): Cleans up any resources used by the server.
     """
 
-    def __init__(self, socket_path):
-        self.socket_path = socket_path
-        self.server = None
+    def __init__(self, path: str = "/tmp/decor8r.sock") -> None:
+        self._path = path
+        self._server = None
 
     def run(self):
         """
         Starts the server and listens for incoming connections.
         """
-        if os.path.exists(self.socket_path):
-            os.unlink(self.socket_path)
+        if os.path.exists(self._path):
+            os.unlink(self._path)
 
-        self.server = ThreadingUnixStreamServer(self.socket_path, Handler)
+        self._server = ThreadingUnixStreamServer(self._path, Handler)
 
         # Set up signal handlers for graceful shutdown
         signal.signal(signal.SIGINT, self.shutdown)
         signal.signal(signal.SIGTERM, self.shutdown)
 
-        logger.info(f"Starting server on {self.socket_path}")
+        logger.info(f"Starting server on {self._path}")
         try:
-            self.server.serve_forever()
+            self._server.serve_forever()
         except Exception as e:
             logger.error(f"Server error: {e}")
         finally:
@@ -60,16 +60,16 @@ class Decor8rServer:
             frame (frame): The current stack frame.
         """
         logger.info("Shutting down server")
-        if self.server:
-            self.server.shutdown()
+        if self._server:
+            self._server.shutdown()
 
     def cleanup(self):
         """
         Cleans up any resources used by the server.
         """
         logger.info("Cleaning up")
-        if os.path.exists(self.socket_path):
-            os.unlink(self.socket_path)
+        if os.path.exists(self._path):
+            os.unlink(self._path)
 
 
 def _parse_arguments():

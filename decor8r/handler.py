@@ -26,38 +26,38 @@ class Handler(StreamRequestHandler):
         super().__init__(request, client_address, server)
 
     def handle(self):
-            """
-            Handles the incoming request and sends the response.
+        """
+        Handles the incoming request and sends the response.
 
-            This method reads the request from the client, processes it using the
-            `_processor` object, and sends the response back to the client.
+        This method reads the request from the client, processes it using the
+        `_processor` object, and sends the response back to the client.
 
-            If the request is empty, a warning is logged and no response is sent.
+        If the request is empty, a warning is logged and no response is sent.
 
-            If the request is "stop", a stop command is logged and the server is
-            shut down.
+        If the request is "stop", a stop command is logged and the server is
+        shut down.
 
-            Any exceptions that occur during request processing are logged as errors.
+        Any exceptions that occur during request processing are logged as errors.
 
-            Returns:
-                None
-            """
-            try:
-                request = self.rfile.readline().strip()
-                logger.info(f"Received request: {request} from {self.client_address}")
+        Returns:
+            None
+        """
+        try:
+            request = self.rfile.readline().strip()
+            logger.info(f"Received request: {request} from {self.client_address}")
 
-                if not request:
-                    logger.warning("Empty request received")
-                    return
+            if not request:
+                logger.warning("Empty request received")
+                return
 
-                if request == b"stop":
-                    logger.info("Stop command received")
-                    self.server.shutdown()
-                    return
+            if request == b"stop":
+                logger.info("Stop command received")
+                self.server.shutdown()
+                return
 
-                response = self._processor.process(request)
-                logger.info(f"Sending response: {response}")
-                self.wfile.write(response)
+            response = self._processor.process(request)
+            logger.info(f"Sending response: {response}")
+            self.wfile.write(response)
 
-            except Exception as e:
-                logger.error(f"Error processing request: {e}")
+        except Exception as e:
+            logger.error(f"Error processing request: {e}")
