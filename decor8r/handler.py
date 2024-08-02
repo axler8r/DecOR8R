@@ -1,32 +1,63 @@
-import os
-from socketserver import StreamRequestHandler, ThreadingUnixStreamServer
+from socketserver import StreamRequestHandler
 
 from loguru import logger
 
 from decor8r.processor import Processor
 
-if os.path.exists("/tmp/decor8r.sock"):
-    os.unlink("/tmp/decor8r.sock")
-
 
 class Handler(StreamRequestHandler):
+    """
+    A request handler class that processes incoming requests.
+
+    This class extends the StreamRequestHandler class from the socketserver module.
+    It handles incoming requests by processing them using an instance of the Processor class.
+
+    Attributes:
+        _processor (Processor): An instance of the Processor class used to process requests.
+
+    Methods:
+        handle(): Overrides the handle method of the StreamRequestHandler class.
+                  It reads the incoming request, processes it, and sends the response back.
+
+    """
+
     def __init__(self, request, client_address, server) -> None:
         self._processor = Processor()
         super().__init__(request, client_address, server)
 
     def handle(self):
-        request = self.rfile.readline().strip()
-        response = self._processor.process(request)
+            """
+            Handles the incoming request and sends the response.
 
-        logger.info(f"Received request: {request}")
+            This method reads the request from the client, processes it using the
+            `_processor` object, and sends the response back to the client.
 
-        if request == b"stop":
-            logger.info("Stopping server")
-            self.server.shutdown()
-        else:
-            logger.info(f"Sending response: {response}")
-            self.wfile.write(response)
+            If the request is empty, a warning is logged and no response is sent.
 
+            If the request is "stop", a stop command is logged and the server is
+            shut down.
 
-with ThreadingUnixStreamServer("/tmp/decor8r.sock", Handler) as server:
-    server.serve_forever()
+            Any exceptions that occur during request processing are logged as errors.
+
+            Returns:
+                None
+            """
+            try:
+                request = self.rfile.readline().strip()
+                logger.info(f"Received request: {request} from {self.client_address}")
+
+                if not request:
+                    logger.warning("Empty request received")
+                    return
+
+                if request == b"stop":
+                    logger.info("Stop command received")
+                    self.server.shutdown()
+                    return
+
+                response = self._processor.process(request)
+                logger.info(f"Sending response: {response}")
+                self.wfile.write(response)
+
+            except Exception as e:
+                logger.error(f"Error processing request: {e}")
