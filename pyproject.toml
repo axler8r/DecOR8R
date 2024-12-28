@@ -1,0 +1,10 @@
+[project]
+name = "decor8r"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["source/decor8rd", "source/decor8rctl", "source/decor8", "share/decor8rlib"]

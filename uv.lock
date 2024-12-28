@@ -1,0 +1,36 @@
+version = 1
+requires-python = ">=3.12"
+
+[manifest]
+members = [
+    "decor8",
+    "decor8r",
+    "decor8rctl",
+    "decor8rd",
+    "decor8rlib",
+]
+
+[[package]]
+name = "decor8"
+version = "0.1.0"
+source = { virtual = "source/decor8" }
+
+[[package]]
+name = "decor8r"
+version = "0.1.0"
+source = { virtual = "." }
+
+[[package]]
+name = "decor8rctl"
+version = "0.1.0"
+source = { virtual = "source/decor8rctl" }
+
+[[package]]
+name = "decor8rd"
+version = "0.1.0"
+source = { virtual = "source/decor8rd" }
+
+[[package]]
+name = "decor8rlib"
+version = "0.1.0"
+source = { editable = "share/decor8rlib" }
