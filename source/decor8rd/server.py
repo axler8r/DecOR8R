@@ -6,7 +6,7 @@ from socketserver import ThreadingUnixStreamServer
 
 from loguru import logger
 
-from decor8r.handler import Handler
+from decor8rd.handler import Handler
 
 
 class Decor8rServer:

@@ -2,7 +2,7 @@ from socketserver import StreamRequestHandler
 
 from loguru import logger
 
-from decor8r.processor import Processor
+from decor8rd.processor import Processor
 
 
 class Handler(StreamRequestHandler):
