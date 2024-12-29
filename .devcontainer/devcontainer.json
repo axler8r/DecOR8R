@@ -10,6 +10,13 @@
 	"features": {
 		"ghcr.io/va-h/devcontainers-features/uv": {
 			"shellautocompletion": true
+		},
+		"ghcr.io/devcontainers-extra/features/apt-packages": {
+			"packages": [
+				"netcat",
+				"socat",
+				"tig"
+			]
 		}
 	},
 	 "customizations": {
@@ -22,6 +29,5 @@
 				"tamasfe.even-better-toml"
 			]
 		}
-	 },
-	 "postCreateCommand": "sudo apt update && sudo apt upgrade --yes && sudo apt install netcat socat --yes"
+	 }
 }
