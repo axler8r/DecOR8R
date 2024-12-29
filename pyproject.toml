@@ -4,7 +4,14 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "loguru>=0.7.3",
+]
 
 [tool.uv.workspace]
 members = ["source/decor8rd", "source/decor8rctl", "source/decor8", "share/decor8rlib"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8.4",
+]
