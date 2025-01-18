@@ -1,9 +1,8 @@
 # Variables
 PYTHON = python3
-PROJECT_NAME = decor8r
 
 # Directories
-SOURCE_DIR = $(PROJECT_NAME)
+SOURCE_DIR = source
 TEST_DIR = test
 
 # Targets
