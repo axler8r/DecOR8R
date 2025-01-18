@@ -26,6 +26,16 @@ test-verbose:
 	@echo "Running tests with verbose output..."
 	$(PYTHON) -m pytest -v $(TEST_DIR)
 
-run:
+start-server:
 	@echo "Running the application..."
-	$(PYTHON) -m $(SOURCE_DIR).server
+	[ -d log ] || mkdir log
+	PYTHONPATH=$(shell pwd)/source/:${PYTHONPATH} nohup $(PYTHON) -m decor8rd.server > log/server-$(shell date +%Y%m%d%H%M%S).log &
+
+stop-server:
+	@echo "Stopping the application..."
+	echo stop | nc -U /tmp/decor8r.sock
+
+send-request:
+	@echo "Sending a request to the server..."
+	echo $(filter-out $@,$(MAKECMDGOALS)) | nc -U /tmp/decor8r.sock && echo
+
