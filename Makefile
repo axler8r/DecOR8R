@@ -13,12 +13,11 @@ all: format check test docs
 
 format:
 	@echo "Formatting code..."
-	$(PYTHON) -m black $(SOURCE_DIR)
-	$(PYTHON) -m isort $(SOURCE_DIR)
+	ruff format $(SOURCE_DIR) $(TEST_DIR)
 
 check:
-	@echo "Running mypy for type checking..."
-	$(PYTHON) -m mypy $(SOURCE_DIR)
+	@echo "Checking code..."
+	ruff check $(SOURCE_DIR) $(TEST_DIR)
 
 test:
 	@echo "Running tests..."
