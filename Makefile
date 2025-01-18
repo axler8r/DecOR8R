@@ -6,9 +6,10 @@ SOURCE_DIR = source
 TEST_DIR = test
 
 # Targets
-.PHONY: all format check test test_verbose docs run pyinstaller project clean
+.PHONY: all clean format check test test-verbose start-server stop-server send-request
 
-all: format check test docs
+all: format check test
+
 clean:
 	@echo "Cleaning up..."
 	rm -rf **/__pycache__ 2>/dev/null
@@ -42,4 +43,7 @@ stop-server:
 send-request:
 	@echo "Sending a request to the server..."
 	echo $(filter-out $@,$(MAKECMDGOALS)) | nc -U /tmp/decor8r.sock && echo
+
+%:
+	@true
 
