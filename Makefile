@@ -9,6 +9,10 @@ TEST_DIR = test
 .PHONY: all format check test test_verbose docs run pyinstaller project clean
 
 all: format check test docs
+clean:
+	@echo "Cleaning up..."
+	rm -rf **/__pycache__ 2>/dev/null
+	rm -r  **/*.pyc 2>/dev/null
 
 format:
 	@echo "Formatting code..."
