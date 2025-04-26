@@ -4,6 +4,7 @@ PYTHON = python3
 # Directories
 SOURCE_DIR = source
 TEST_DIR = test
+SHARE_DIR = share
 
 # Targets
 .PHONY: all clean format check test test-verbose start-server stop-server send-request
@@ -17,11 +18,11 @@ clean:
 
 format:
 	@echo "Formatting code..."
-	ruff format $(SOURCE_DIR) $(TEST_DIR)
+	ruff format $(SOURCE_DIR) $(SHARE_DIR) $(TEST_DIR)
 
 check:
 	@echo "Checking code..."
-	ruff check $(SOURCE_DIR) $(TEST_DIR)
+	ruff check $(SOURCE_DIR) $(SHARE_DIR) $(TEST_DIR)
 
 test:
 	@echo "Running tests..."
