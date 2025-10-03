@@ -1,13 +1,3 @@
-[project]
-name = "decor8r"
-version = "0.1.0"
-description = "A decorator for prompts and status lines."
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "loguru>=0.7.3",
-]
-
 [tool.uv.workspace]
 members = ["source/decor8rd", "source/decor8rctl", "source/decor8", "share/decor8rlib"]
 
@@ -15,4 +5,8 @@ members = ["source/decor8rd", "source/decor8rctl", "source/decor8", "share/decor
 dev = [
     "pytest>=8.3.4",
     "ruff>=0.8.4",
+]
+common = [
+    "loguru>=0.7.3",
+    "pyyaml>=6.0",
 ]
